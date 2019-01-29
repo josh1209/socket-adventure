@@ -1,5 +1,6 @@
 import socket
 import sys
+import time
 
 try:
     port = int(sys.argv[1])
@@ -21,3 +22,4 @@ while True:
 
     my_message = input("> ").encode('utf-8') + b'\n'
     client_socket.sendall(my_message)
+#    time.sleep(1)
