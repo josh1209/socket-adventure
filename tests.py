@@ -9,36 +9,7 @@ import socket
 
 
 class WebTestCase(unittest.TestCase):
-    """tests for socket adventure"""
-    
-    def setUp(self):
-        self.server_process = subprocess.Popen(
-            [
-                "python",
-                "server.py"
-            ],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        )
-        
-    def tearDown(self):
-        self.server_process.kill()
-        self.server_process.communicate()
-        
-    def get_response(self, url):
-        """
-        Helper function to get a response from a given url, using http.client
-        """
-
-        conn = http.client.HTTPConnection('localhost:50000')
-        conn.request('GET', url)
-
-        response = conn.getresponse()
-
-        conn.close()
-
-        return response
-        
+    """tests for socket adventure"""        
         
     def server_start(self):
         self.server_thread = threading.Thread(target=Server().serve)
@@ -134,20 +105,6 @@ class WebTestCase(unittest.TestCase):
         self.server_close()
         
         self.assertEqual(response, 'OK! You say, "is anybody there?\n"\n')
-"""
-    def test_02(self):
-        server_thread = threading.Thread(target=self.run_fake_server)
-        server_thread.start()
-        
-        test_client = socket.socket()
-        test_client.connect(("127.0.0.1", 50000))
-        response = test_client.recv(4096).decode()
-        print(response)
-"""
-        
-
-
-        
         
 if __name__ == '__main__':
     unittest.main()
